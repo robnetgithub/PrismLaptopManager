@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="AllLaptops.Views.EditLaptopView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             Background="White">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="5" FontFamily="Arial" FontSize="15" Text="Hostname: "/>
+                <TextBlock Margin="5" FontFamily="Arial" FontSize="15" Text="{Binding LaptopToEdit.Hostname}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+            <CheckBox Margin="5" FontFamily="Arial" FontSize="15" Content="Pool Laptop" IsChecked="{Binding LaptopToEdit.Pool_Laptop}"/>
+            <CheckBox  FontFamily="Arial" FontSize="15" Content="Retired" Margin="5" IsChecked="{Binding LaptopToEdit.Retired}"/>
+                <TextBlock Text="{Binding LaptopToEdit.Retired_Date}" FontFamily="Arial" FontSize="15" Margin="5" Width="150"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="5" FontFamily="Arial" FontSize="15" Text="Last Online: "/>
+                <TextBlock Margin="5" FontFamily="Arial" FontSize="15" Text="{Binding LaptopToEdit.Last_connected}"/>
+                <TextBlock Margin="5" FontFamily="Arial" FontSize="15" Text=" days ago  "/>
+                <Button Width="128" FontFamily="Arial" FontSize="15" Margin="5,0" Content="Send reminder..." VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="5" FontFamily="Arial" FontSize="15" Text="Set Status: "/>
+                <ComboBox Margin="5" Width="125" FontFamily="Arial" FontSize="15" ItemsSource="{Binding LaptopStatuses}" SelectedItem="{Binding LaptopToEdit.PL_Checked_IN, Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Notes: " Margin="5" FontFamily="Arial" FontSize="15"/>
+                <TextBox Text="{Binding LaptopToEdit.Notes, Mode=TwoWay}" TextWrapping="Wrap" FontFamily="Arial" FontSize="15" Margin="5" Width="276"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button FontFamily="Arial" FontSize="15" Margin="5" Padding="5" Content="Save" Command="{Binding SaveCommand}"/>
+                <Button FontFamily="Arial" FontSize="15" Margin="5" Padding="5"  Content="Cancel" Command="{Binding CancelCommand}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

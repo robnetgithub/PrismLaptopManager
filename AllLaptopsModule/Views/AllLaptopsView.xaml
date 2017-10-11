@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="AllLaptops.Views.AllLaptopsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="DataGrid_Body_Content_Centering" TargetType="{x:Type DataGridCell}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <xcdg:DataGridCollectionViewSource x:Key="cvs_laptops" Source="{Binding Laptops}"/>
+    </UserControl.Resources>
+    <Grid>
+
+        <xcdg:DataGridControl x:Name="allLaptopsDataGrid"  ItemsSource="{Binding Source={StaticResource cvs_laptops}}"
+                              SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedLaptop, Mode=OneWayToSource}" ReadOnly="True" AutoCreateDetailConfigurations="True">
+            <xcdg:DataGridControl.View>
+                <xcdg:TableView>
+                    <xcdg:TableView.Theme>
+                        <xcdg:LiveExplorerTheme/>
+                    </xcdg:TableView.Theme>
+                </xcdg:TableView>
+            </xcdg:DataGridControl.View>
+            <xcdg:DataGridControl.Columns>
+                <xcdg:Column FieldName="Edit" Width="50" >
+                    <xcdg:Column.CellContentTemplate>
+                        <DataTemplate>
+                            <Button Background="Blue" Foreground="White" Padding="5,1,5,1" Content="Edit" 
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.EditLaptopCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedLaptop}"
+                                    />
+                        </DataTemplate>
+                    </xcdg:Column.CellContentTemplate>
+                </xcdg:Column>
+                <xcdg:Column FieldName="Hostname" Title="Hostname" CellHorizontalContentAlignment="Center" />
+                <xcdg:Column FieldName="OU" Title="OU" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" Width="35" />
+                <xcdg:Column FieldName="Pool_Laptop" Title="Pool?" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" Width="50"/>
+                <xcdg:Column FieldName="Billed_UID" Title="Billed User" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="Primary_UID" Title="Primary User" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="Date_Added" Title="Date Added" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="Build_Date" Title="Built" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center"  />
+                <xcdg:Column FieldName="Last_Connect" Title="Last Connect" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="Last_Update" Title="Last Update" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="Model" Title="Model" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="OS" Title="OS" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />                
+                <xcdg:Column FieldName="Serial" Title="Serial" CellVerticalContentAlignment="Center" CellHorizontalContentAlignment="Center" />
+                <xcdg:Column FieldName="Duplicate Serial" Title="Duplicate Serial" CellVerticalContentAlignment="Center" CellHorizontalContentAlignment="Center" />
+                <xcdg:Column FieldName="MAC_Addr" Title="MAC Address" CellVerticalContentAlignment="Center" CellHorizontalContentAlignment="Center" />
+                <xcdg:Column FieldName="Friendly_OU" Title="Friendly OU" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center"  />
+                <xcdg:Column FieldName="Retired" Title="Retired" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="Retired_Date" Title="Retired Date" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="Notes" Title="Notes" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="PL_Booking_CMP" Title="Ticket Ref." CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="PL_Status" Title="Status" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="PL_User" Title="Loan User" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="PL_Booked_From" Title="From" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="PL_Booked_To" Title="To" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="PL_Updated_By" Title="Engineer" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+            </xcdg:DataGridControl.Columns>
+        </xcdg:DataGridControl>
+
+        
+
+            <!--<DataGrid CellStyle="{StaticResource DataGrid_Body_Content_Centering}" ItemsSource="{Binding Laptops}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedLaptop, Mode=OneWayToSource}" 
+                  AutoGenerateColumns="False" IsReadOnly="True" AlternationCount="1" AreRowDetailsFrozen="True" FrozenColumnCount="2"
+                  RowBackground="#FFB7F6F9" AlternatingRowBackground="#FFF5FFFE">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Background="Blue" Foreground="White" Padding="5,1,5,1" Content="Edit" 
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.EditLaptopCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedLaptop}"
+                                    />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Hostname" Binding="{Binding Hostname}" />
+                <DataGridTextColumn Header="OU" Binding="{Binding OU}" />
+                <DataGridTextColumn Header="Billed UID" Binding="{Binding Billed_UID}" />
+                <DataGridTextColumn Header="Primary UID" Binding="{Binding Primary_UID}" />
+                <DataGridTextColumn Header="Date Added" Binding="{Binding Date_Added}" />
+                <DataGridTextColumn Header="Build Date" Binding="{Binding Build_Date}" />
+                <DataGridTextColumn Header="Last Connect" Binding="{Binding Last_connected}" />
+                <DataGridTextColumn Header="Last Update" Binding="{Binding Last_Updated}" />
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}" />
+                <DataGridTextColumn Header="OS" Binding="{Binding OS}" />                
+                <DataGridTextColumn Header="Pool Laptop" Binding="{Binding Pool_Laptop}" />
+                <DataGridTextColumn Header="Serial" Binding="{Binding Serial}" />
+                <DataGridTextColumn Header="Duplicate Serial" Binding="{Binding DuplicateSerial}" />
+                <DataGridTextColumn Header="MAC Addr" Binding="{Binding MAC_Address}" />
+                <DataGridTextColumn Header="Friendly OU" Binding="{Binding Friendly_OU}" />
+                <DataGridTextColumn Header="Retired" Binding="{Binding Retired}" />
+                <DataGridTextColumn Header="Retired Date" Binding="{Binding Retired_Date}" />
+                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" />
+                <DataGridTextColumn Header="PL Booking CMP" Binding="{Binding PL_Booking_CMP}" />
+                <DataGridTextColumn Header="PL Status" Binding="{Binding PL_Checked_IN}" />
+                <DataGridTextColumn Header="PL User" Binding="{Binding PL_User_SOEID}" />
+                <DataGridTextColumn Header="PL Booked From" Binding="{Binding PL_Booked_From}" />
+                <DataGridTextColumn Header="PL Booked To" Binding="{Binding PL_Booked_To}" />
+                <DataGridTextColumn Header="PL Updated By" Binding="{Binding PL_Updated_By}" />
+            </DataGrid.Columns>
+            
+        </DataGrid>-->
+    </Grid>
+</UserControl>

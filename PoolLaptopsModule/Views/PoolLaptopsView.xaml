@@ -1,0 +1,326 @@
+﻿<UserControl x:Class="PoolLaptops.Views.PoolLaptopsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+             xmlns:view="clr-namespace:PoolLaptops.Views"
+             xmlns:inf="clr-namespace:PrismLaptopManager.Infrastructure;assembly=PrismLaptopManager.Infrastructure"
+             mc:Ignorable="d"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="poollaptopsview">
+
+    <UserControl.Resources>
+        <view:StatusToActionTextConverter x:Key="ActionTextConverter" />
+        <view:StatusToButtonColourConverter x:Key="ActionBGConverter" />
+        <xcdg:DataGridCollectionViewSource x:Key="cvs_laptops"
+                                  Source="{Binding Laptops}"/>
+				<Style x:Key="Body_Content_DataGrid_Centering"
+					   TargetType="{x:Type DataGridCell}">
+					 <Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type DataGridCell}">
+								<Grid Background="{TemplateBinding Background}">
+									 <ContentPresenter VerticalAlignment="Center" />
+								 </Grid>
+							</ControlTemplate>
+						 </Setter.Value>
+					 </Setter>
+				</Style>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+
+        <!--<xcdg:DataGridControl x:Name="pldatagrid" ItemsSource="{Binding Source={StaticResource cvs_laptops} }" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedLaptop}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <xcdg:DataGridControl.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Foreground" Value="white" />
+                    <Setter Property="Margin" Value="1" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid>
+                                    <Rectangle x:Name="GelBackground" Opacity="1" RadiusX="9" RadiusY="9" Fill="{TemplateBinding Background}" StrokeThickness="0.35">
+                                        <Rectangle.Stroke>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="White" Offset="0" />
+                                                <GradientStop Color="#666666" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Rectangle.Stroke>
+                                    </Rectangle>
+                                    <Rectangle x:Name="GelShine" Margin="2,2,2,0" VerticalAlignment="Top" RadiusX="6" RadiusY="6" Opacity="1"  Stroke="Transparent" Height="15px">
+                                        <Rectangle.Fill>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#ccffffff" Offset="0"/>
+                                                <GradientStop Color="Transparent" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Fill" TargetName="GelBackground">
+                                            <Setter.Value>
+                                                <RadialGradientBrush>
+                                                    <GradientStop Color="Lime" Offset="0" />
+                                                    <GradientStop Color="DarkGreen" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter Property="Fill" TargetName="GelBackground">
+                                            <Setter.Value>
+                                                <RadialGradientBrush>
+                                                    <GradientStop Color="#ffcc00" Offset="0"/>
+                                                    <GradientStop Color="#cc9900" Offset="1"/>
+                                                </RadialGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </xcdg:DataGridControl.Resources>
+            
+            
+            <xcdg:DataGridControl.Columns>
+                <xcdg:Column FieldName="Hostname" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center"/>
+                <xcdg:Column FieldName="OU" Width="30" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center"/>
+                <xcdg:Column FieldName="Model" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center"/>
+                <xcdg:Column FieldName="PL_Checked_IN" Title="Action">
+                    <xcdg:Column.CellContentTemplate>
+                        <DataTemplate>
+                            <Button         Background="{Binding Converter={StaticResource ActionBGConverter}}"
+                                            Content="{Binding Converter={StaticResource ActionTextConverter}}"
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.EditLaptopCommand}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedLaptop}">
+                            </Button>
+                        </DataTemplate>
+                    </xcdg:Column.CellContentTemplate>
+                </xcdg:Column>
+                <xcdg:Column FieldName="PL_User_SOEID" Title="SOE ID" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center"/>
+                <xcdg:Column FieldName="PL_Booked_From" Title="From" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="PL_Booked_To" Title="To" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="PL_Booking_CMP" Title="Ticket" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="PL_Updated_By" Title="Engineer" CellHorizontalContentAlignment="Center" CellVerticalContentAlignment="Center" />
+                <xcdg:Column FieldName="Notes" Width="400" CellVerticalContentAlignment="Center" CellHorizontalContentAlignment="Left"/>
+            </xcdg:DataGridControl.Columns>  
+        </xcdg:DataGridControl>-->
+        
+        
+        
+            <DataGrid ItemsSource="{Binding Source={StaticResource cvs_laptops} }" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedLaptop}" 
+                      AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#FFEBEBEB" AlternationCount="1" Margin="3,0,3,3" Opacity="0.95" RenderTransformOrigin="0,0" RowBackground="White" CellStyle="{StaticResource Body_Content_DataGrid_Centering}">
+            	<DataGrid.Effect>
+            		<DropShadowEffect/>
+            	</DataGrid.Effect>
+            <DataGrid.Resources>
+				<Style TargetType="{x:Type Button}">
+                    <Setter Property="Foreground" Value="white" />
+                    <Setter Property="Margin" Value="1" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid>
+                                    <Rectangle x:Name="GelBackground" Opacity="1" RadiusX="9" RadiusY="9" Fill="{TemplateBinding Background}" StrokeThickness="0.35">
+                                        <Rectangle.Stroke>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="White" Offset="0" />
+                                                <GradientStop Color="#666666" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Rectangle.Stroke>
+                                    </Rectangle>
+                                    <Rectangle x:Name="GelShine" Margin="2,2,2,0" VerticalAlignment="Top" RadiusX="6" RadiusY="6" Opacity="1"  Stroke="Transparent" Height="15px">
+                                        <Rectangle.Fill>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#ccffffff" Offset="0"/>
+                                                <GradientStop Color="Transparent" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Fill" TargetName="GelBackground">
+                                            <Setter.Value>
+                                                <RadialGradientBrush>
+                                                    <GradientStop Color="Lime" Offset="0" />
+                                                    <GradientStop Color="DarkGreen" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter Property="Fill" TargetName="GelBackground">
+                                            <Setter.Value>
+                                                <RadialGradientBrush>
+                                                    <GradientStop Color="#ffcc00" Offset="0"/>
+                                                    <GradientStop Color="#cc9900" Offset="1"/>
+                                                </RadialGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                <LinearGradientBrush x:Key="HeaderBrush" StartPoint="2,0" EndPoint="2,2" Opacity="0.5">
+                	<GradientStop Color="#FF737373" Offset="0"/>
+                	<GradientStop Color="#FF4E4E4E" Offset="1"/>
+                </LinearGradientBrush>
+				<LinearGradientBrush x:Key="NormalBrush" StartPoint="2,0" EndPoint="2,2" Opacity="0.5">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                        	<GradientStop Color="Black" Offset="0.289" />
+                            <GradientStop Color="White" Offset="0.996" />
+                            <GradientStop Color="Silver" Offset="0.096"/>
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+				<LinearGradientBrush x:Key="NormalBorderBrush" StartPoint="2,0" EndPoint="2,2" Opacity="0.5">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                        	<GradientStop Color="Black" Offset="1" />
+                            <GradientStop Color="White" Offset="0" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+				<LinearGradientBrush x:Key="MouseOverBrush" StartPoint="2,0" EndPoint="2,2" Opacity="0.5">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                        	<GradientStop Color="Black" Offset="0.289" />
+                            <GradientStop Color="AliceBlue" Offset="0.996" />
+                            <GradientStop Color="AliceBlue" Offset="0.096"/>
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="{DynamicResource HeaderBrush}" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Height" Value="30" />
+                    <Setter Property="SeparatorBrush" Value="#FFC9CACA" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="FontWeight" Value="Normal" />
+                    <Setter Property="Padding" Value="4,0,0,0" />
+                    <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="HoverOn">
+                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Hover" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="HoverOff">
+                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Hover" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid Background='Transparent' >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width='Auto' />
+                            <ColumnDefinition Width='Auto' />
+                            <ColumnDefinition Width='*' />
+                            <ColumnDefinition Width='Auto' />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle x:Name="BackgroundRectangle" Grid.ColumnSpan="4" Grid.RowSpan="2"
+                                   Fill="{StaticResource NormalBrush}" Stretch="Fill" Stroke="{StaticResource NormalBorderBrush}" StrokeThickness="1" />
+                        <Rectangle x:Name="Hover" Grid.ColumnSpan="4" Grid.RowSpan="2" Stretch="Fill" 
+                                   Fill="{StaticResource MouseOverBrush}" Opacity="0" />
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin='{TemplateBinding Padding}'
+                                                  Cursor="{TemplateBinding Cursor}"/>
+                        <Path HorizontalAlignment="Left" x:Name="SortArrow" VerticalAlignment="Center"
+                                      Width="8" Opacity="0" RenderTransformOrigin=".5,.5" Grid.Column="2" Grid.RowSpan="2" Fill="White" Stretch="Uniform" Data="F1 M -5.215,6.099L 5.215,6.099L 0,0L -5.215,6.099 Z ">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX=".9" ScaleY=".9" x:Name="SortIconTransform" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                        <!--<Thumb x:Name="PART_LeftHeaderGripper" Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource ColumnHeaderGripperStyle}"/>
+                        <Thumb x:Name="PART_RightHeaderGripper" Grid.Column="3" HorizontalAlignment="Right" Style="{StaticResource ColumnHeaderGripperStyle}"/>-->
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="SortDirection" Value="Ascending">
+                            <Setter TargetName="SortArrow" Property="Opacity" Value="1" />
+                            <Setter TargetName="SortArrow" Property="RenderTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="180" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="BackgroundRectangle" Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Descending">
+                            <Setter TargetName="SortArrow" Property="Opacity" Value="1" />
+                            <Setter TargetName="BackgroundRectangle" Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource HoverOn}"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource HoverOff}"/>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>        
+                </Style>
+            </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Hostname" Binding="{Binding Hostname}" />
+                    <DataGridTextColumn Header="OU" Binding="{Binding OU}" />
+                    <DataGridTextColumn Header="Model" Binding="{Binding Model}" />
+                    <DataGridTemplateColumn Header="Action">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Padding="2" Width="100" Foreground="White" 
+                                            Background="{Binding PL_Checked_IN, NotifyOnSourceUpdated=True, BindsDirectlyToSource=True, Converter={StaticResource ActionBGConverter}}" 
+                                            Content="{Binding PL_Checked_IN, Converter={StaticResource ActionTextConverter}}"
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.EditLaptopCommand}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedLaptop}">
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="SOE ID" Binding="{Binding PL_User_SOEID}" />
+                    <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" />
+                    <DataGridTextColumn Header="From" Binding="{Binding PL_Booked_From}" />
+                    <DataGridTextColumn Header="To" Binding="{Binding PL_Booked_To}" />
+                    <DataGridTextColumn Header="Ticket" Binding="{Binding PL_Booking_CMP}" />
+                    <DataGridTextColumn Header="Engineer" Binding="{Binding PL_Updated_By}" />
+                    <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="400"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        
+    </Grid>
+</UserControl>

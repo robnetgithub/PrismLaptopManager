@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{334CE698-C3DF-4005-9764-1721E68797A5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PoolLaptopsModule</RootNamespace>
+    <AssemblyName>PoolLaptopsModule</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ExpressionBlendVersion>12.0.60617.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Prism, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.1.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf">
+      <HintPath>..\packages\Prism.Unity.6.1.1\lib\net45\Prism.Unity.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.1.0\lib\net45\Prism.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Wpf.Controls.v5.9, Version=5.9.16174.18040, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.Controls.5.9.16174.18040\lib\net40\Xceed.Wpf.Controls.v5.9.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid.ThemePack.1.v5.9, Version=5.9.16174.18040, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.DataGrid.ThemePack.1.5.9.16174.18040\lib\net40\Xceed.Wpf.DataGrid.ThemePack.1.v5.9.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid.ThemePack.2.v5.9, Version=5.9.16174.18040, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.DataGrid.ThemePack.2.5.9.16174.18040\lib\net40\Xceed.Wpf.DataGrid.ThemePack.2.v5.9.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid.ThemePack.3.v5.9, Version=5.9.16174.18040, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.DataGrid.ThemePack.3.5.9.16174.18040\lib\net40\Xceed.Wpf.DataGrid.ThemePack.3.v5.9.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid.ThemePack.4.v5.9, Version=5.9.16174.18040, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.DataGrid.ThemePack.4.5.9.16174.18040\lib\net40\Xceed.Wpf.DataGrid.ThemePack.4.v5.9.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid.v5.9, Version=5.9.16174.18040, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.DataGrid.5.9.16174.18040\lib\net40\Xceed.Wpf.DataGrid.v5.9.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid.Views3D.v5.9, Version=5.9.16174.18040, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.DataGrid.Views3D.5.9.16174.18040\lib\net40\Xceed.Wpf.DataGrid.Views3D.v5.9.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PoolLaptopsModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ILaptopCheckinCheckoutViewModel.cs" />
+    <Compile Include="ViewModels\IPoolLaptopsViewModel.cs" />
+    <Compile Include="ViewModels\LaptopCheckinCheckoutViewModel.cs" />
+    <Compile Include="ViewModels\PoolLaptopsViewModel.cs" />
+    <Compile Include="Views\ILaptopCheckinCheckoutView.cs" />
+    <Compile Include="Views\IPoolLaptopsView.cs" />
+    <Compile Include="Views\LaptopCheckinCheckoutView.xaml.cs">
+      <DependentUpon>LaptopCheckinCheckoutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PoolLaptopsView.xaml.cs">
+      <DependentUpon>PoolLaptopsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatusToActionTextConverter.cs" />
+    <Compile Include="Views\StatusToButtonColourConverter.cs" />
+    <Compile Include="Views\StatusToCheckinCheckoutCommandConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\LaptopCheckinCheckoutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PoolLaptopsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LaptopRepository.Service\Repository.Service.csproj">
+      <Project>{8f25b235-2681-41a6-986f-947c8f1867b0}</Project>
+      <Name>Repository.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Laptops.Service\Laptops.Service.csproj">
+      <Project>{5174a56e-8c16-441e-85ca-83d61e1a018c}</Project>
+      <Name>Laptops.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PrismLaptopManager.Infrastructure\PrismLaptopManager.Infrastructure.csproj">
+      <Project>{3fef1a5c-a0d9-423f-a667-ecc3d389173f}</Project>
+      <Name>PrismLaptopManager.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PrismLaptopManager.Repository\Repository.Interface.csproj">
+      <Project>{4d31b475-98be-4313-84a0-a4a49d524a0e}</Project>
+      <Name>Repository.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <DesignData Include="SampleData\LaptopSampleData.xaml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

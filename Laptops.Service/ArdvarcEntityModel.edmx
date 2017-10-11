@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ArdvarcModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="mt_Laptop_Inventory_Audit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Serial" Type="nchar" MaxLength="10" />
+          <Property Name="Hostname" Type="nvarchar" MaxLength="50" />
+          <Property Name="CheckedOutTo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+          <Property Name="Date_Time" Type="datetime2" Precision="0" />
+          <Property Name="Updated_By" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="mt_Laptop_Inventory_LDN">
+          <Key>
+            <PropertyRef Name="Hostname" />
+          </Key>
+          <Property Name="Hostname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Primary_UID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Billed_UID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pool_Laptop" Type="bit" />
+          <Property Name="Last_connected" Type="int" />
+          <Property Name="Build_Date" Type="date" />
+          <Property Name="Retired" Type="nvarchar" MaxLength="7" />
+          <Property Name="Retired_Date" Type="date" />
+          <Property Name="OS" Type="nvarchar" MaxLength="10" />
+          <Property Name="Model" Type="nvarchar(max)" />
+          <Property Name="MAC_Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Serial" Type="nvarchar" MaxLength="50" />
+          <Property Name="DuplicateSerial" Type="nvarchar" MaxLength="50" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Friendly_OU" Type="nvarchar" MaxLength="50" />
+          <Property Name="OU" Type="nvarchar(max)" />
+          <Property Name="Date_Added" Type="date" />
+          <Property Name="PL_Booking_CMP" Type="nvarchar" MaxLength="50" />
+          <Property Name="PL_Booked_From" Type="date" />
+          <Property Name="PL_Booked_To" Type="date" />
+          <Property Name="PL_Checked_IN" Type="nvarchar" MaxLength="50" />
+          <Property Name="PL_Updated_By" Type="nvarchar" MaxLength="50" />
+          <Property Name="PL_User_SOEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Last_Updated" Type="datetime2" Precision="0" />
+        </EntityType>
+        <EntityType Name="mt_Users">
+          <Key>
+            <PropertyRef Name="SOEID" />
+          </Key>
+          <Property Name="SOEID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Forename" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Officer Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Job_Title" Type="nvarchar(max)" />
+          <Property Name="Department" Type="nvarchar(max)" />
+          <Property Name="Dept_Name" Type="nvarchar(max)" />
+          <Property Name="Business" Type="nvarchar(max)" />
+          <Property Name="Sector" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="ArdvarcModelStoreContainer">
+          <EntitySet Name="mt_Laptop_Inventory_Audit" EntityType="Self.mt_Laptop_Inventory_Audit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mt_Laptop_Inventory_LDN" EntityType="Self.mt_Laptop_Inventory_LDN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mt_Users" EntityType="Self.mt_Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ArdvarcModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Serial" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Hostname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedOutTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Date_Time" Type="DateTime" Precision="0" />
+          <Property Name="Updated_By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Laptop">
+          <Key>
+            <PropertyRef Name="Hostname" />
+          </Key>
+          <Property Name="Hostname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Primary_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Billed_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_connected" Type="Int32" />
+          <Property Name="Build_Date" Type="DateTime" Precision="0" />
+          <Property Name="Retired" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="Retired_Date" Type="DateTime" Precision="0" />
+          <Property Name="OS" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MAC_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Serial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DuplicateSerial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Friendly_OU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pool_Laptop" Type="Boolean" />
+          <Property Name="Date_Added" Type="DateTime" Precision="0" />
+          <Property Name="PL_Booking_CMP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PL_Booked_From" Type="DateTime" Precision="0" />
+          <Property Name="PL_Booked_To" Type="DateTime" Precision="0" />
+          <Property Name="PL_Checked_IN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PL_Updated_By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PL_User_SOEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Updated" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="SOEID" />
+          </Key>
+          <Property Name="SOEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Forename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Officer_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Job_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dept_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Business" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sector" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="ArdvarcEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Transactions" EntityType="ArdvarcModel.Transaction" />
+          <EntitySet Name="Laptops" EntityType="ArdvarcModel.Laptop" />
+          <EntitySet Name="Users" EntityType="ArdvarcModel.User" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ArdvarcModelStoreContainer" CdmEntityContainer="ArdvarcEntities">
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="ArdvarcModel.Transaction">
+              <MappingFragment StoreEntitySet="mt_Laptop_Inventory_Audit">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="Hostname" ColumnName="Hostname" />
+                <ScalarProperty Name="CheckedOutTo" ColumnName="CheckedOutTo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Laptops">
+            <EntityTypeMapping TypeName="ArdvarcModel.Laptop">
+              <MappingFragment StoreEntitySet="mt_Laptop_Inventory_LDN">
+                <ScalarProperty Name="Hostname" ColumnName="Hostname" />
+                <ScalarProperty Name="Primary_UID" ColumnName="Primary_UID" />
+                <ScalarProperty Name="Billed_UID" ColumnName="Billed_UID" />
+                <ScalarProperty Name="Last_connected" ColumnName="Last_connected" />
+                <ScalarProperty Name="Build_Date" ColumnName="Build_Date" />
+                <ScalarProperty Name="Retired" ColumnName="Retired" />
+                <ScalarProperty Name="Retired_Date" ColumnName="Retired_Date" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="MAC_Address" ColumnName="MAC_Address" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="DuplicateSerial" ColumnName="DuplicateSerial" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Friendly_OU" ColumnName="Friendly_OU" />
+                <ScalarProperty Name="OU" ColumnName="OU" />
+                <ScalarProperty Name="Pool_Laptop" ColumnName="Pool_Laptop" />
+                <ScalarProperty Name="Date_Added" ColumnName="Date_Added" />
+                <ScalarProperty Name="PL_Booking_CMP" ColumnName="PL_Booking_CMP" />
+                <ScalarProperty Name="PL_Booked_From" ColumnName="PL_Booked_From" />
+                <ScalarProperty Name="PL_Booked_To" ColumnName="PL_Booked_To" />
+                <ScalarProperty Name="PL_Checked_IN" ColumnName="PL_Checked_IN" />
+                <ScalarProperty Name="PL_Updated_By" ColumnName="PL_Updated_By" />
+                <ScalarProperty Name="PL_User_SOEID" ColumnName="PL_User_SOEID" />
+                <ScalarProperty Name="Last_Updated" ColumnName="Last_Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ArdvarcModel.User">
+              <MappingFragment StoreEntitySet="mt_Users">
+                <ScalarProperty Name="SOEID" ColumnName="SOEID" />
+                <ScalarProperty Name="Forename" ColumnName="Forename" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Officer_Title" ColumnName="Officer Title" />
+                <ScalarProperty Name="Job_Title" ColumnName="Job_Title" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Dept_Name" ColumnName="Dept_Name" />
+                <ScalarProperty Name="Business" ColumnName="Business" />
+                <ScalarProperty Name="Sector" ColumnName="Sector" />
+                <ScalarProperty Name="City" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
